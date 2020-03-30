@@ -18,7 +18,7 @@ func main() {
 
 	notepads, err := client.GetNotepadList().Unmarshal() // will return Notepads
 
-	content, err := client.GetNotepadContent("hw01").WithUco(12356).WithUcos(1234, 45678, 91105).Unmarshal()
+	content, err := client.GetNotepadContent("hw01").WithUco(12356).WithUcos(1234, 45678).Unmarshal()
 
 	response, err := client.WriteNotepadContent("hw01", 123465, "Great work! *100").Execute()
 
