@@ -1,4 +1,4 @@
-package ismuniapi
+package goismuniapi
 
 import "encoding/xml"
 

@@ -1,8 +1,9 @@
-package ismuniapi
+package goismuniapi
 
 import (
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 type operationBuilder struct {
@@ -122,11 +123,11 @@ func (builder *CourseStudentsBuilder) WithRegistered() *CourseStudentsBuilder {
 	return builder
 }
 
-func (builder *CourseStudentsBuilder) WithEnded(b bool) *CourseStudentsBuilder {
+func (builder *CourseStudentsBuilder) WithEnded() *CourseStudentsBuilder {
 	builder.Query().Set("vcukonc", "a")
 	return builder
 }
-func (builder *CourseStudentsBuilder) WithInactive(b bool) *CourseStudentsBuilder {
+func (builder *CourseStudentsBuilder) WithInactive() *CourseStudentsBuilder {
 	builder.Query().Set("vcneaktiv", "a")
 	return builder
 }
@@ -174,13 +175,38 @@ func (builder *WriteNotepadBuilder) WithLastChange(datetime string) *WriteNotepa
 
 // Exams
 
-func (builder *ExamsBuilder) WithEnded(b bool) *ExamsBuilder {
+func (builder *ExamsBuilder) WithEnded() *ExamsBuilder {
 	builder.Query().Set("vcukonc", "a")
 	return builder
 }
 
-func (builder *ExamsBuilder) WithInactive(b bool) *ExamsBuilder {
+func (builder *ExamsBuilder) WithInactive() *ExamsBuilder {
 	builder.Query().Set("vcneaktiv", "a")
+	return builder
+}
+
+// Get notepad content
+
+func (builder *NotepadContentBuilder) withUco(uco int) *NotepadContentBuilder {
+	return builder.withUcoStr(strconv.Itoa(uco))
+}
+
+func (builder *NotepadContentBuilder) withUcoStr(uco string) *NotepadContentBuilder {
+	builder.Query().Add("uco", uco)
+	return builder
+}
+
+func (builder *NotepadContentBuilder) withUcos(ucos ...int) *NotepadContentBuilder {
+	for _, uco := range ucos {
+		builder.withUco(uco)
+	}
+	return builder
+}
+
+func (builder *NotepadContentBuilder) withUcosStr(ucos ...string) *NotepadContentBuilder {
+	for _, uco := range ucos {
+		builder.withUcoStr(uco)
+	}
 	return builder
 }
 

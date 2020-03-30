@@ -1,4 +1,4 @@
-package ismuniapi
+package goismuniapi
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func (c *IsApiClient) GetCourseStudents() CourseStudentsBuilder {
 	return builder
 }
 
-func (c *IsApiClient) GetSeminaryStudents(seminaries []string) SeminaryStudentsBuilder {
+func (c *IsApiClient) GetSeminaryStudents(seminaries ...string) SeminaryStudentsBuilder {
 	builder := SeminaryStudentsBuilder{c.newOperationBuilder("seminar-seznam")}
 	for _, seminar := range seminaries {
 		builder.Query().Add("seminar", seminar)
@@ -38,7 +38,7 @@ func (c *IsApiClient) GetSeminaryStudents(seminaries []string) SeminaryStudentsB
 	return builder
 }
 
-func (c *IsApiClient) GetSeminaryTeachers(seminaries []string) SeminaryTeachersBuilder {
+func (c *IsApiClient) GetSeminaryTeachers(seminaries ...string) SeminaryTeachersBuilder {
 	builder := SeminaryTeachersBuilder{c.newOperationBuilder("seminar-cvicici-seznam")}
 	for _, seminar := range seminaries {
 		builder.Query().Add("seminar", seminar)
@@ -53,7 +53,7 @@ func (c *IsApiClient) GetExams() ExamsBuilder {
 }
 
 func (c *IsApiClient) GetNotepadList() NotepadsBuilder {
-	return NotepadsBuilder{c.newOperationBuilder("predmet-info")}
+	return NotepadsBuilder{c.newOperationBuilder("bloky-seznam")}
 
 }
 
@@ -65,12 +65,9 @@ func (c *IsApiClient) CreateNotepad(shortcut string, name string) CreateNotepadB
 
 }
 
-func (c *IsApiClient) GetNotepadContent(shortcut string, ucos []int) NotepadContentBuilder {
+func (c *IsApiClient) GetNotepadContent(shortcut string) NotepadContentBuilder {
 	builder := NotepadContentBuilder{c.newOperationBuilder("blok-dej-obsah")}
 	builder.Query().Set("zkratka", shortcut)
-	for _, uco := range ucos {
-		builder.Query().Add("uco", strconv.Itoa(uco))
-	}
 	return builder
 
 }

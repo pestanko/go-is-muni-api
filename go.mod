@@ -1,4 +1,4 @@
-module github.com/pestanko/goisapi
+module github.com/pestanko/goismuniapi
 
 go 1.13
 

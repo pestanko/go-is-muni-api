@@ -1,20 +1,3 @@
-# Go Is Muni API
-Go wrapper for the IS MUNI API (https://is.muni.cz/)
-
-Official API documentation can be found [here](https://is.muni.cz/napoveda/technicka/bloky_api).
-
-## Install
-
-To install the package use the `go get`
-
-```bash
-go get github.com/pestanko/goismuniapi
-```
-
-### Usage
-
-
-```go
 package main
 
 import (
@@ -41,8 +24,3 @@ func main() {
 
 	response, err := client.CreateNotepad("hw01", "Homework 01").WithStatistics(true).Execute()
 }
-
-```
-
-
-
